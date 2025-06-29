@@ -63,7 +63,7 @@ You can play the game live on GitHub Pages:
 *   Sound effects:
     *   `fire.mp3` (shoot sound)
     *   `explode.mp3` (explosion sound)
-    *   `error.wav` (error sound)
+    *   `error.mp3` (error sound)
     *   `add-miss-char.mp3` (missed character sound)
 *   Background image: `bg.png`
 *   Player fighter image: `tank.png`

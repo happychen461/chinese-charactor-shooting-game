@@ -1,12 +1,234 @@
-[
-    { "char": "一", "pinyin": "yi" },
-    { "char": "二", "pinyin": "er" },
-    { "char": "三", "pinyin": "san" },
-    { "char": "四", "pinyin": "si" },
-    { "char": "五", "pinyin": "wu" },
-    { "char": "六", "pinyin": "liu" },
-    { "char": "七", "pinyin": "qi" },
-    { "char": "八", "pinyin": "ba" },
-    { "char": "九", "pinyin": "jiu" },
-    { "char": "十", "pinyin": "shi" }
+[{
+        "char": "老鼠",
+        "pinyin": "laoshu"
+    },
+    {
+        "char": "折纸",
+        "pinyin": "zhezhi"
+    },
+    {
+        "char": "扎",
+        "pinyin": "zha"
+    },
+    {
+        "char": "哭",
+        "pinyin": "ku"
+    },
+    {
+        "char": "风筝",
+        "pinyin": "fengzheng"
+    },
+    {
+        "char": "漂流",
+        "pinyin": "piaoliu"
+    },
+    {
+        "char": "抓",
+        "pinyin": "zhua"
+    },
+    {
+        "char": "俩",
+        "pinyin": "lia"
+    },
+    {
+        "char": "幸福",
+        "pinyin": "xinfu"
+    },
+    {
+        "char": "愿望",
+        "pinyin": "yuanwang"
+    },
+    {
+        "char": "但是",
+        "pinyin": "danshi"
+    },
+    {
+        "char": "取下",
+        "pinyin": "quxia"
+    },
+    {
+        "char": "取下",
+        "pinyin": "quxia"
+    },
+    {
+        "char": "吵闹",
+        "pinyin": "chaonao"
+    },
+    {
+        "char": "松果",
+        "pinyin": "songguo"
+    },
+    {
+        "char": "纸条",
+        "pinyin": "zhitiao"
+    },
+    {
+        "char": "屋顶",
+        "pinyin": "wuding"
+    },
+
+    {
+        "char": "假",
+        "pinyin": "jia"
+    },
+    {
+        "char": "连",
+        "pinyin": "lian"
+    },
+    {
+        "char": "颗",
+        "pinyin": "ke"
+    },
+    {
+        "char": "转",
+        "pinyin": "zhuan"
+    },
+    {
+        "char": "扯",
+        "pinyin": "che"
+    },
+    {
+        "char": "障",
+        "pinyin": "zhang"
+    },
+    {
+        "char": "鲁",
+        "pinyin": "lu"
+    },
+    {
+        "char": "抗",
+        "pinyin": "kang"
+    },
+    {
+        "char": "越",
+        "pinyin": "yue"
+    },
+    {
+        "char": "神",
+        "pinyin": "shen"
+    },
+    {
+        "char": "裙",
+        "pinyin": "qun"
+    },
+    {
+        "char": "闪",
+        "pinyin": "shan"
+    },
+    {
+        "char": "曼",
+        "pinyin": "man"
+    },
+    {
+        "char": "借",
+        "pinyin": "jie"
+    },
+    {
+        "char": "碗",
+        "pinyin": "wan"
+    },
+    {
+        "char": "爷",
+        "pinyin": "ye"
+    },
+    {
+        "char": "爪",
+        "pinyin": "zhao"
+    },
+    {
+        "char": "神",
+        "pinyin": "shen"
+    },
+    {
+        "char": "活",
+        "pinyin": "huo"
+    },
+    {
+        "char": "猪",
+        "pinyin": "zhu"
+    },
+    {
+        "char": "图片识字",
+        "pinyin": "tu pian shi zi"
+    },
+    {
+        "char": "组词识字",
+        "pinyin": "zu ci shi zi"
+    },
+    {
+        "char": "加一加识字",
+        "pinyin": "jia yi jia shi zi"
+    },
+    {
+        "char": "写字",
+        "pinyin": "xie zi"
+    },
+    {
+        "char": "威武",
+        "pinyin": "wei wu"
+    },
+    {
+        "char": "转动",
+        "pinyin": "zhuan dong"
+    },
+    {
+        "char": "抗拒",
+        "pinyin": "kang ju"
+    },
+    {
+        "char": "难受",
+        "pinyin": "nan shou"
+    },
+    {
+        "char": "趣",
+        "pinyin": "qu"
+    },
+    {
+        "char": "纳闷",
+        "pinyin": "na men"
+    },
+    {
+        "char": "懊悔",
+        "pinyin": "ao hui"
+    },
+    {
+        "char": "食物",
+        "pinyin": "shi wu"
+    },
+    {
+        "char": "身边",
+        "pinyin": "shen bian"
+    },
+    {
+        "char": "为什么",
+        "pinyin": "wei shen me"
+    },
+    {
+        "char": "爪子",
+        "pinyin": "zhao zi"
+    },
+    {
+        "char": "面前",
+        "pinyin": "mian qian"
+    },
+    {
+        "char": "神气活现",
+        "pinyin": "shen qi huo xian"
+    },
+    {
+        "char": "野猪",
+        "pinyin": "ye zhu"
+    },
+    {
+        "char": "往常",
+        "pinyin": "wang chang"
+    },
+    {
+        "char": "往后",
+        "pinyin": "wang hou"
+    },
+    {
+        "char": "信以为真",
+        "pinyin": "xin yi wei zhen"
+    }
 ]

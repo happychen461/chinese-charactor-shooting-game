@@ -1,0 +1,12 @@
+[
+    { "char": "一", "pinyin": "yi" },
+    { "char": "二", "pinyin": "er" },
+    { "char": "三", "pinyin": "san" },
+    { "char": "四", "pinyin": "si" },
+    { "char": "五", "pinyin": "wu" },
+    { "char": "六", "pinyin": "liu" },
+    { "char": "七", "pinyin": "qi" },
+    { "char": "八", "pinyin": "ba" },
+    { "char": "九", "pinyin": "jiu" },
+    { "char": "十", "pinyin": "shi" }
+]

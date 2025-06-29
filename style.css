@@ -1,0 +1,217 @@
+body {
+    font-family: sans-serif;
+    text-align: center;
+}
+
+#game-container {
+    position: relative;
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+    margin: 0 auto;
+    overflow: hidden;
+    background-image: url('./img/bg.png');
+    background-size: cover;
+    background-position: center;
+}
+
+#game-area {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.character {
+    position: absolute;
+    font-size: 2em;
+    user-select: none;
+}
+
+#player-fighter {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    font-size: 3em;
+    bottom: 10px;
+    left: 375px;
+}
+
+#pinyin-input {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    width: 200px;
+    padding: 5px;
+}
+
+#score-display {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.5em;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+#missed-characters {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.0em; /* Reduced font size */
+    color: red; /* Changed color for better visibility */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    z-index: 10;
+}
+
+.bullet {
+    position: absolute;
+    width: 0;
+    height: 0;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-bottom: 15px solid red;
+    transform-origin: 50% 100%; /* Rotate from the bottom center */
+}
+
+.explosion {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    background-image: url('https://www.transparentpng.com/thumb/explosion/explosion-transparent-png-2.png');
+    background-size: contain;
+    animation: explode 0.5s ease-out;
+}
+
+@keyframes explode {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+#speed-controls {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Reduced gap */
+    align-items: center;
+}
+.button-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+.arrow-button {
+    width: 60px; /* Smaller width */
+    height: 60px; /* Smaller height */
+    background-color: #81c784; /* Greenish button */
+    border: 3px solid #4caf50; /* Smaller border */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Smaller shadow */
+    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    overflow: hidden; /* Ensure SVG stays within bounds */
+}
+.arrow-button:hover {
+    background-color: #66bb6a;
+    transform: translateY(-2px); /* Smaller hover effect */
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Smaller hover shadow */
+}
+.arrow-button:active {
+    background-color: #43a047;
+    transform: translateY(1px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller active shadow */
+}
+.arrow-icon {
+    fill: #ffffff; /* White arrow */
+    width: 70%;
+    height: 70%;
+    filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3)); /* Shadow for the arrow */
+}
+
+#results-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 30px;
+    border-radius: 10px;
+    text-align: center;
+    z-index: 20;
+}
+
+#results-screen h2 {
+    margin-top: 0;
+    font-size: 2em;
+}
+
+#results-screen p {
+    font-size: 1.2em;
+    margin: 10px 0;
+}
+
+#results-screen button {
+    padding: 10px 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+#start-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+    z-index: 30; /* Above game elements */
+}
+
+#start-screen button {
+    padding: 15px 30px;
+    font-size: 2em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#start-screen button:hover {
+    background-color: #45a049;
+    transform: scale(1.05);
+}
+
+#start-screen button:active {
+    background-color: #3e8e41;
+    transform: scale(0.95);
+}
+
+.hidden {
+    display: none;
+}
+

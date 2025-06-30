@@ -47,10 +47,6 @@
         "pinyin": "quxia"
     },
     {
-        "char": "取下",
-        "pinyin": "quxia"
-    },
-    {
         "char": "吵闹",
         "pinyin": "chaonao"
     },
@@ -133,7 +129,7 @@
     },
     {
         "char": "爪",
-        "pinyin": "zhao"
+        "pinyin": "zhua"
     },
     {
         "char": "神",
@@ -148,36 +144,20 @@
         "pinyin": "zhu"
     },
     {
-        "char": "图片识字",
-        "pinyin": "tu pian shi zi"
-    },
-    {
-        "char": "组词识字",
-        "pinyin": "zu ci shi zi"
-    },
-    {
-        "char": "加一加识字",
-        "pinyin": "jia yi jia shi zi"
-    },
-    {
-        "char": "写字",
-        "pinyin": "xie zi"
-    },
-    {
         "char": "威武",
-        "pinyin": "wei wu"
+        "pinyin": "weiwu"
     },
     {
         "char": "转动",
-        "pinyin": "zhuan dong"
+        "pinyin": "zhuandong"
     },
     {
         "char": "抗拒",
-        "pinyin": "kang ju"
+        "pinyin": "kangju"
     },
     {
         "char": "难受",
-        "pinyin": "nan shou"
+        "pinyin": "nanshou"
     },
     {
         "char": "趣",
@@ -185,50 +165,46 @@
     },
     {
         "char": "纳闷",
-        "pinyin": "na men"
+        "pinyin": "namen"
     },
     {
         "char": "懊悔",
-        "pinyin": "ao hui"
+        "pinyin": "aohui"
     },
     {
         "char": "食物",
-        "pinyin": "shi wu"
+        "pinyin": "shiwu"
     },
     {
         "char": "身边",
-        "pinyin": "shen bian"
-    },
-    {
-        "char": "为什么",
-        "pinyin": "wei shen me"
+        "pinyin": "shenbian"
     },
     {
         "char": "爪子",
-        "pinyin": "zhao zi"
+        "pinyin": "zhuazi"
     },
     {
         "char": "面前",
-        "pinyin": "mian qian"
+        "pinyin": "mianqian"
     },
     {
         "char": "神气活现",
-        "pinyin": "shen qi huo xian"
+        "pinyin": "shenqihuoxian"
     },
     {
         "char": "野猪",
-        "pinyin": "ye zhu"
+        "pinyin": "yezhu"
     },
     {
         "char": "往常",
-        "pinyin": "wang chang"
+        "pinyin": "wangchang"
     },
     {
         "char": "往后",
-        "pinyin": "wang hou"
+        "pinyin": "wanghou"
     },
     {
         "char": "信以为真",
-        "pinyin": "xin yi wei zhen"
+        "pinyin": "xinyiweizhen"
     }
 ]

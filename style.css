@@ -78,8 +78,26 @@ h1 {
 
 .character {
     position: absolute;
-    font-size: 2em;
+    font-size: 2.5em; /* Slightly larger font */
     user-select: none;
+    font-family: 'Pacifico', cursive; /* Apply the fun font */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Stronger text shadow */
+    animation: floatAndFade 3s infinite ease-in-out; /* Subtle floating animation */
+}
+
+@keyframes floatAndFade {
+    0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: translateY(-5px) scale(1.05);
+        opacity: 0.9;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 #player-fighter {
@@ -90,6 +108,7 @@ h1 {
     bottom: 10px;
     left: 50%;
     transform: translateX(-50%);
+    transition: transform 0.2s ease-out;
 }
 
 #pinyin-input {
@@ -116,10 +135,37 @@ h1 {
     position: absolute;
     top: 1.25%; /* 10px / 800px */
     left: 0.83%; /* 10px / 1200px */
-    font-size: 1.5em;
-    color: white;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    font-size: 1.2em; /* Smaller font size */
+    color: #4CAF50; /* Green color */
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.8); /* Stronger shadow */
     z-index: 10;
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background */
+    padding: 5px 10px; /* Smaller padding */
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    display: flex; /* Use flexbox for layout */
+    flex-direction: column; /* Stack items vertically */
+    align-items: flex-start; /* Align items to the start */
+    gap: 2px; /* Smaller space between items */
+}
+
+#correct-count, #missed-count-display {
+    font-size: 1em; /* Base font size for individual counts */
+    color: white; /* White text for counts */
+    text-shadow: none; /* Remove individual text shadow */
+}
+
+#correct-count, #missed-count-display {
+    font-size: 1em; /* Base font size for individual counts */
+    color: white; /* White text for counts */
+    text-shadow: none; /* Remove individual text shadow */
+}
+
+#correct-count, #missed-count-display {
+    font-size: 1em; /* Base font size for individual counts */
+    color: white; /* White text for counts */
+    text-shadow: none; /* Remove individual text shadow */
 }
 
 #missed-characters {
@@ -130,12 +176,38 @@ h1 {
     color: red; /* Changed color for better visibility */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
     z-index: 10;
+    display: flex; /* Use flexbox for layout */
+    align-items: center; /* Vertically align items */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+#missed-characters span {
+    margin-right: 5px; /* Space between label and list */
+    font-weight: bold;
+    color: white;
+}
+
+#missed-characters-list {
+    display: flex; /* Display characters in a row */
+    flex-wrap: wrap; /* Allow wrapping to next line */
+    gap: 5px; /* Space between characters */
+}
+
+.missed-char-item {
+    background-color: #dc3545; /* Red background for missed characters */
+    color: white;
+    padding: 3px 8px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    white-space: nowrap; /* Prevent character from breaking */
 }
 
 .bullet {
     position: absolute;
-    width: 8px;
-    height: 25px;
+    width: 6px;
+    height: 20px;
     background-color: #2E8B57;
     border-radius: 5px;
 }
@@ -236,9 +308,31 @@ h1 {
     color: #4CAF50; /* Green heading */
 }
 
-#results-screen p {
-    font-size: 1.4em; /* Larger font */
-    margin: 15px 0;
+#final-missed-list-container {
+    max-height: 200px; /* Limit height */
+    overflow-y: auto; /* Enable vertical scrolling */
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Subtle border */
+    border-radius: 8px;
+    background-color: rgba(255, 255, 255, 0.1); /* Slightly transparent background */
+}
+
+#final-missed-list {
+    list-style: none; /* Remove bullet points */
+    padding: 0;
+    margin: 0;
+}
+
+#final-missed-list li {
+    padding: 8px 0;
+    border-bottom: 1px dashed rgba(255, 255, 255, 0.2); /* Dashed separator */
+    font-size: 1.1em;
+    color: #f0f0f0; /* Lighter text color */
+}
+
+#final-missed-list li:last-child {
+    border-bottom: none; /* No border for the last item */
 }
 
 #results-screen button {

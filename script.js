@@ -18,21 +18,27 @@ let characters = [];
 let allCharacters = []; // Store all characters initially
 let availableCharacters = []; // Characters yet to be dropped
 let activeCharacters = [];
-let score = 0;
-let characterSpeed = 0.3;
+let correctCount = 0;
+
 
 let missedCharacters = new Set();
 let gameInterval;
 let totalCharacters = 0;
 
+let baseCharacterSpeed = 0.3; // Global base speed
+const minSpeed = 0.8;
+const maxSpeed = 1.5;
+
 slowDownArrow.addEventListener('click', () => {
-    if (characterSpeed > 1) {
-        characterSpeed--;
+    if (baseCharacterSpeed > 0.1) { // Prevent speed from going too low
+        baseCharacterSpeed -= 0.1;
     }
+    pinyinInput.focus();
 });
 
 speedUpArrow.addEventListener('click', () => {
-    characterSpeed++;
+    baseCharacterSpeed += 0.1;
+    pinyinInput.focus();
 });
 
 let gamePaused = false;
@@ -106,6 +112,23 @@ function createCharacter() {
     charElement.dataset.pinyin = charData.pinyin;
     charElement.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
     charElement.style.top = '-50px';
+
+    // Random color
+    const colors = ['#FF6347', '#FFD700', '#6A5ACD', '#3CB371', '#1E90FF', '#FF69B4']; // A palette of fun colors
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    charElement.style.color = randomColor;
+
+    // Random font size
+    const minFontSize = 2.0; // em
+    const maxFontSize = 4.0; // em
+    const randomFontSize = (Math.random() * (maxFontSize - minFontSize) + minFontSize).toFixed(1);
+    charElement.style.fontSize = `${randomFontSize}em`;
+    charElement.dataset.initialSize = randomFontSize;
+
+    // Random speed
+    const randomSpeedMultiplier = (Math.random() * (maxSpeed - minSpeed) + minSpeed);
+    charElement.dataset.speed = randomSpeedMultiplier;
+
     gameArea.appendChild(charElement);
     activeCharacters.push(charElement);
 }
@@ -113,12 +136,11 @@ function createCharacter() {
 function moveCharacters() {
     if (!gameStarted || gamePaused) return;
 
-    //console.log('gameArea.offsetHeight:', gameArea.offsetHeight);
     activeCharacters.forEach((char, index) => {
         const top = parseFloat(char.style.top);
-        //console.log(`Character ${char.textContent} raw top: ${char.style.top}, parsed top: ${top}`); // Debugging line
         if (top > gameArea.offsetHeight + 50) {
             missedCharacters.add({ char: char.textContent, pinyin: char.dataset.pinyin });
+            document.getElementById('missed-count-display').textContent = `Missed: ${missedCharacters.size}`;
             updateMissedCharactersDisplay();
             missedSound.play();
             char.remove();
@@ -128,13 +150,30 @@ function moveCharacters() {
                 showResults();
             }
         } else {
-            char.style.top = top + characterSpeed + 'px';
+            // Move character
+            char.style.top = top + (baseCharacterSpeed * parseFloat(char.dataset.speed)) + 'px';
+
+            // Dynamically change font size
+            const initialSize = parseFloat(char.dataset.initialSize);
+            if (initialSize) {
+                const progress = Math.max(0, top) / gameArea.offsetHeight; // Progress from 0 to 1
+                const growthFactor = 1.5; // How much it grows. 1.5 means it can get 50% bigger.
+                const newSize = initialSize * (1 + progress * (growthFactor - 1));
+                char.style.fontSize = `${newSize}em`;
+            }
         }
     });
 }
 
 function updateMissedCharactersDisplay() {
-    missedCharactersDisplay.textContent = `Missed: ${Array.from(missedCharacters).map(c => c.char).join(', ')}`;
+    const missedListContainer = document.getElementById('missed-characters-list');
+    missedListContainer.innerHTML = ''; // Clear previous characters
+    Array.from(missedCharacters).forEach(c => {
+        const charSpan = document.createElement('span');
+        charSpan.classList.add('missed-char-item');
+        charSpan.textContent = c.char;
+        missedListContainer.appendChild(charSpan);
+    });
 }
 
 function shoot(pinyin) {
@@ -165,61 +204,85 @@ function shoot(pinyin) {
         const angleRad = Math.atan2(targetX - playerCenterX, -(targetY - playerCenterY));
 
         // Apply rotation to the player fighter
-        playerFighter.style.transform = `rotate(${angleRad}rad)`;
+        playerFighter.style.transform = `translateX(-50%) rotate(${angleRad}rad)`;
 
-        shootSound.play();
+        // Create bullet element here to get its dimensions
         const bullet = document.createElement('div');
         bullet.classList.add('bullet');
-        const playerRect = playerFighter.getBoundingClientRect();
-        const gameAreaRect = gameArea.getBoundingClientRect();
+        gameArea.appendChild(bullet); // Append to DOM to get dimensions
 
-        let bulletX = playerRect.left - gameAreaRect.left + playerRect.width / 2 - 2.5;
-        let bulletY = playerRect.top - gameAreaRect.top;
+        // Introduce a short delay before shooting the bullet
+        setTimeout(() => {
+            shootSound.play();
+            const playerRect = playerFighter.getBoundingClientRect();
+            const gameAreaRect = gameArea.getBoundingClientRect();
 
-        bullet.style.left = bulletX + 'px';
-        bullet.style.top = bulletY + 'px';
-        gameArea.appendChild(bullet);
+            const playerCenterX = playerRect.left - gameAreaRect.left + playerRect.width / 2;
+            const playerCenterY = playerRect.top - gameAreaRect.top + playerRect.height / 2;
 
-        const speed = 40;
-
-        const bulletInterval = setInterval(() => {
-            const currentTargetRect = targetCharacter.getBoundingClientRect();
-            const currentTargetX = currentTargetRect.left - gameAreaRect.left + currentTargetRect.width / 2;
-            const currentTargetY = currentTargetRect.top - gameAreaRect.top + currentTargetRect.height / 2;
-
-            const angle = Math.atan2(currentTargetY - bulletY, currentTargetX - bulletX);
-            bulletX += Math.cos(angle) * speed;
-            bulletY += Math.sin(angle) * speed;
+            // Calculate absolute bullet start position from the center of the player fighter
+            let bulletX = playerCenterX - (bullet.offsetWidth / 2); // Center horizontally
+            let bulletY = playerCenterY - (bullet.offsetHeight / 2); // Center vertically
 
             bullet.style.left = bulletX + 'px';
             bullet.style.top = bulletY + 'px';
-            bullet.style.transform = `rotate(${angle + Math.PI / 2}rad)`; // Add PI/2 to point upwards
 
-            const bulletRect = bullet.getBoundingClientRect();
-            const charRect = targetCharacter.getBoundingClientRect();
+            // Debugging marker
+            const debugMarker = document.createElement('div');
+            debugMarker.style.position = 'absolute';
+            debugMarker.style.width = '5px';
+            debugMarker.style.height = '5px';
+            debugMarker.style.backgroundColor = 'transparent';
+            debugMarker.style.left = bulletX + 'px';
+            debugMarker.style.top = bulletY + 'px';
+            debugMarker.style.zIndex = '999'; // Ensure it's visible
+            gameArea.appendChild(debugMarker);
 
-            if (
-                bulletRect.left < charRect.right &&
-                bulletRect.right > charRect.left &&
-                bulletRect.top < charRect.bottom &&
-                bulletRect.bottom > charRect.top
-            ) {
-                explosionSound.play();
-                explode(currentTargetX, currentTargetY);
-                targetCharacter.remove();
-                activeCharacters.splice(targetIndex, 1);
-                bullet.remove();
-                clearInterval(bulletInterval);
-                score++;
-                scoreDisplay.textContent = `Score: ${score}`;
-                //console.log('Score:', score);
-            }
+            setTimeout(() => {
+                debugMarker.remove();
+            }, 2000); // Remove marker after 500ms
 
-            if (bulletY < 0 || bulletY > gameArea.offsetHeight || bulletX < 0 || bulletX > gameArea.offsetWidth) {
-                bullet.remove();
-                clearInterval(bulletInterval);
-            }
-        }, 20);
+            const speed = 40;
+
+            const bulletInterval = setInterval(() => {
+                const currentTargetRect = targetCharacter.getBoundingClientRect();
+                const currentTargetX = currentTargetRect.left - gameAreaRect.left + currentTargetRect.width / 2;
+                const currentTargetY = currentTargetRect.top - gameAreaRect.top + currentTargetRect.height / 2;
+
+                const angle = Math.atan2(currentTargetY - bulletY, currentTargetX - bulletX);
+                bulletX += Math.cos(angle) * speed;
+                bulletY += Math.sin(angle) * speed;
+
+                bullet.style.left = bulletX + 'px';
+                bullet.style.top = bulletY + 'px';
+                bullet.style.transform = `rotate(${angle + Math.PI / 2}rad)`; // Add PI/2 to point upwards
+
+                const bulletRect = bullet.getBoundingClientRect();
+                const charRect = targetCharacter.getBoundingClientRect();
+
+                if (
+                    bulletRect.left < charRect.right &&
+                    bulletRect.right > charRect.left &&
+                    bulletRect.top < charRect.bottom &&
+                    bulletRect.bottom > charRect.top
+                ) {
+                    explosionSound.play();
+                    explode(currentTargetX, currentTargetY);
+                    targetCharacter.remove();
+                    activeCharacters.splice(targetIndex, 1);
+                    bullet.remove();
+                    clearInterval(bulletInterval);
+                    correctCount++;
+                    document.getElementById('correct-count').textContent = `Correct: ${correctCount}`;
+                    //console.log('Score:', score);
+                }
+
+                if (bulletY < 0 || bulletY > gameArea.offsetHeight || bulletX < 0 || bulletX > gameArea.offsetWidth) {
+                    bullet.remove();
+                    clearInterval(bulletInterval);
+                }
+            }, 20);
+        }, 200); // 200ms delay for smoother animation
 
         pinyinInput.value = '';
     } else {
@@ -253,12 +316,25 @@ function gameLoop() {
 }
 
 function showResults() {
-    const hitCount = score;
+    const hitCount = correctCount;
     const missedCount = missedCharacters.size;
     document.getElementById('final-score').textContent = `Characters Hit: ${hitCount}`;
     document.getElementById('final-missed').textContent = `Characters Missed: ${missedCount}`;
-    const missedList = Array.from(missedCharacters).map(c => `${c.char} (${c.pinyin})`).join(', ');
-    document.getElementById('final-missed-list').textContent = missedList;
+
+    const finalMissedList = document.getElementById('final-missed-list');
+    finalMissedList.innerHTML = ''; // Clear previous list
+    if (missedCharacters.size > 0) {
+        missedCharacters.forEach(c => {
+            const listItem = document.createElement('li');
+            listItem.textContent = `${c.char} (${c.pinyin})`;
+            finalMissedList.appendChild(listItem);
+        });
+    } else {
+        const listItem = document.createElement('li');
+        listItem.textContent = 'Great job! No characters missed!';
+        finalMissedList.appendChild(listItem);
+    }
+
     document.getElementById('results-screen').classList.remove('hidden');
     pinyinInput.disabled = true;
 
@@ -271,10 +347,10 @@ function showResults() {
 }
 
 function retryGame() {
-    console.log('characterSpeed on retryGame:', characterSpeed);
+    console.log('baseCharacterSpeed on retryGame:', baseCharacterSpeed);
     //console.log('retryGame function called.');
     // Reset game state
-    score = 0;
+    correctCount = 0;
     missedCharacters.clear();
     activeCharacters = [];
     availableCharacters = [...allCharacters]; // Reset available characters
@@ -283,7 +359,7 @@ function retryGame() {
     gameArea.querySelectorAll('.character').forEach(char => char.remove());
 
     // Update displays
-    scoreDisplay.textContent = `Score: ${score}`;
+    document.getElementById('correct-count').textContent = `Correct: ${correctCount}`;
     updateMissedCharactersDisplay();
 
     // Hide results screen and enable input
@@ -299,10 +375,10 @@ function retryGame() {
 }
 
 function retryFailedGame() {
-    console.log('characterSpeed on retryFailedGame:', characterSpeed);
+    console.log('baseCharacterSpeed on retryFailedGame:', baseCharacterSpeed);
     //console.log('retryFailedGame function called.');
     // Reset game state
-    score = 0;
+    correctCount = 0;
     availableCharacters = Array.from(missedCharacters);
     missedCharacters.clear();
     activeCharacters = [];
@@ -311,7 +387,7 @@ function retryFailedGame() {
     gameArea.querySelectorAll('.character').forEach(char => char.remove());
 
     // Update displays
-    scoreDisplay.textContent = `Score: ${score}`;
+    document.getElementById('correct-count').textContent = `Correct: ${correctCount}`;
     updateMissedCharactersDisplay();
 
     // Hide results screen and enable input

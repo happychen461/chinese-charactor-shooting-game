@@ -1,4 +1,5 @@
 const gameArea = document.getElementById('game-area');
+const gameContainer = document.getElementById('game-container');
 const startScreen = document.getElementById('start-screen');
 const startButton = document.getElementById('start-button');
 const playerFighter = document.getElementById('player-fighter');
@@ -39,6 +40,7 @@ const pauseButton = document.getElementById('pause-button');
 
 const pauseIcon = document.getElementById('pause-icon');
 const playIcon = document.getElementById('play-icon');
+const fullscreenButton = document.getElementById('fullscreen-button');
 
 function togglePauseGame() {
     gamePaused = !gamePaused;
@@ -54,6 +56,16 @@ function togglePauseGame() {
 }
 
 pauseButton.addEventListener('click', togglePauseGame);
+
+fullscreenButton.addEventListener('click', () => {
+    if (document.fullscreenElement) {
+        document.exitFullscreen();
+    } else {
+        gameContainer.requestFullscreen();
+    }
+    pinyinInput.focus();
+
+});
 
 fetch('characters.json')
     .then(response => response.json())

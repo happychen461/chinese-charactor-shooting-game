@@ -1,18 +1,31 @@
 body {
-    font-family: sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
     text-align: center;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+h1 {
+    color: #333;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
 }
 
 #game-container {
     position: relative;
     width: 1200px;
     height: 800px;
-    border: 1px solid black;
-    margin: 0 auto;
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 10px; /* Rounded corners */
+    margin: 20px auto; /* Adjusted margin */
     overflow: hidden;
     background-image: url('./img/bg.png');
     background-size: cover;
     background-position: center;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Stronger shadow */
 }
 
 #game-container:fullscreen {
@@ -121,21 +134,20 @@ body {
 
 .bullet {
     position: absolute;
-    width: 0;
-    height: 0;
-    border-left: 5px solid transparent;
-    border-right: 5px solid transparent;
-    border-bottom: 15px solid red;
-    transform-origin: 50% 100%; /* Rotate from the bottom center */
+    width: 8px;
+    height: 25px;
+    background-color: #2E8B57;
+    border-radius: 5px;
 }
 
 .explosion {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 100px; /* Increased size */
+    height: 100px; /* Increased size */
     background-image: url('./img/explosion.png');
     background-size: contain;
-    animation: explode 0.5s ease-out;
+    animation: explode 0.7s ease-out; /* Increased duration */
+    z-index: 100; /* Ensure it's on top */
 }
 
 @keyframes explode {
@@ -169,7 +181,7 @@ body {
 .arrow-button {
     width: 40px; /* Smaller width */
     height: 40px; /* Smaller height */
-    background-color: #81c784; /* Greenish button */
+    background: linear-gradient(to bottom, #81c784, #66bb6a); /* Gradient background */
     border: 3px solid #4caf50; /* Smaller border */
     border-radius: 0;
     display: flex;
@@ -177,17 +189,17 @@ body {
     align-items: center;
     cursor: pointer;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Smaller shadow */
-    transition: transform 0.2s, background-color 0.2s, box-shadow 0.2s;
+    transition: all 0.2s ease; /* Smooth transitions for all properties */
     overflow: hidden; /* Ensure SVG stays within bounds */
 }
 .arrow-button:hover {
-    background-color: #66bb6a;
-    transform: translateY(-2px); /* Smaller hover effect */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.3); /* Smaller hover shadow */
+    background: linear-gradient(to bottom, #66bb6a, #4caf50); /* Darker gradient on hover */
+    transform: translateY(-3px); /* More pronounced hover effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger hover shadow */
 }
 .arrow-button:active {
     background-color: #43a047;
-    transform: translateY(1px);
+    transform: translateY(0);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Smaller active shadow */
 }
 .arrow-icon {
@@ -209,33 +221,46 @@ body {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0, 0.9); /* Darker overlay */
     color: white;
-    padding: 30px;
-    border-radius: 10px;
+    padding: 40px; /* More padding */
+    border-radius: 15px; /* More rounded corners */
     text-align: center;
     z-index: 20;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5); /* Stronger shadow */
 }
 
 #results-screen h2 {
     margin-top: 0;
-    font-size: 2em;
+    font-size: 2.5em; /* Larger font */
+    color: #4CAF50; /* Green heading */
 }
 
 #results-screen p {
-    font-size: 1.2em;
-    margin: 10px 0;
+    font-size: 1.4em; /* Larger font */
+    margin: 15px 0;
 }
 
 #results-screen button {
-    padding: 10px 20px;
+    padding: 12px 25px;
     background-color: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
     cursor: pointer;
-    font-size: 1.2em;
-    margin-top: 20px;
+    font-size: 1.3em;
+    margin-top: 25px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+#results-screen button:hover {
+    background-color: #45a049;
+    transform: translateY(-2px);
+}
+
+#results-screen button:active {
+    background-color: #3e8e41;
+    transform: translateY(0);
 }
 
 #start-screen {
@@ -247,30 +272,32 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent overlay */
+    background-color: rgba(0, 0, 0, 0.85); /* Darker overlay */
     z-index: 30; /* Above game elements */
 }
 
 #start-screen button {
-    padding: 15px 30px;
-    font-size: 2em;
-    background-color: #4CAF50;
+    padding: 20px 40px;
+    font-size: 2.5em;
+    background: linear-gradient(to bottom, #4CAF50, #45a049); /* Gradient background */
     color: white;
     border: none;
-    border-radius: 10px;
+    border-radius: 15px;
     cursor: pointer;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-    transition: background-color 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.4); /* Stronger shadow */
+    transition: all 0.3s ease;
 }
 
 #start-screen button:hover {
-    background-color: #45a049;
-    transform: scale(1.05);
+    background: linear-gradient(to bottom, #45a049, #3e8e41);
+    transform: scale(1.08) translateY(-5px); /* More pronounced hover effect */
+    box-shadow: 0 12px 20px rgba(0, 0, 0, 0.5);
 }
 
 #start-screen button:active {
     background-color: #3e8e41;
-    transform: scale(0.95);
+    transform: scale(0.98) translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .hidden {

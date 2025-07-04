@@ -6,4 +6,4 @@
 
 ## Revision Log
 - 2025/06/30: Initial version
-- 2025/07/03: Increase the game size, added pause button,make the UI looks nicer
+- 2025/07/03: Increase the game size, added pause button,make the UI looks nicer, added full screen support

@@ -2,7 +2,9 @@
 
 ## Feature Requests
 - **Automated Vocabulary Import:** Develop a script to automatically extract new vocabulary from class materials and update the `characters.json` file.
-- **Full Screen Mode:** Add a button or option to enable full-screen mode for the game.
+
+## Pending Fixes
+- Adjust the character's position after swith between full screen mode and windows mode
 
 ## Revision Log
 - 2025/06/30: Initial version

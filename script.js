@@ -18,7 +18,7 @@ let allCharacters = []; // Store all characters initially
 let availableCharacters = []; // Characters yet to be dropped
 let activeCharacters = [];
 let score = 0;
-let characterSpeed = 0.5;
+let characterSpeed = 0.3;
 
 let missedCharacters = new Set();
 let gameInterval;
@@ -34,7 +34,26 @@ speedUpArrow.addEventListener('click', () => {
     characterSpeed++;
 });
 
-let gameStarted = false;
+let gamePaused = false;
+const pauseButton = document.getElementById('pause-button');
+
+const pauseIcon = document.getElementById('pause-icon');
+const playIcon = document.getElementById('play-icon');
+
+function togglePauseGame() {
+    gamePaused = !gamePaused;
+    if (gamePaused) {
+        pauseIcon.style.display = 'none';
+        playIcon.style.display = 'block';
+        clearInterval(gameInterval);
+    } else {
+        pauseIcon.style.display = 'block';
+        playIcon.style.display = 'none';
+        gameInterval = setInterval(createCharacter, 2000);
+    }
+}
+
+pauseButton.addEventListener('click', togglePauseGame);
 
 fetch('characters.json')
     .then(response => response.json())
@@ -55,7 +74,7 @@ function startGame() {
 }
 
 function createCharacter() {
-    if (!gameStarted) return;
+    if (!gameStarted || gamePaused) return;
 
     if (availableCharacters.length === 0) {
         if (activeCharacters.length === 0) {
@@ -73,14 +92,14 @@ function createCharacter() {
     charElement.classList.add('character');
     charElement.textContent = charData.char;
     charElement.dataset.pinyin = charData.pinyin;
-    charElement.style.left = Math.random() * 750 + 'px';
+    charElement.style.left = Math.random() * (gameArea.offsetWidth - 50) + 'px';
     charElement.style.top = '-50px';
     gameArea.appendChild(charElement);
     activeCharacters.push(charElement);
 }
 
 function moveCharacters() {
-    if (!gameStarted) return;
+    if (!gameStarted || gamePaused) return;
 
     //console.log('gameArea.offsetHeight:', gameArea.offsetHeight);
     activeCharacters.forEach((char, index) => {
@@ -184,7 +203,7 @@ function shoot(pinyin) {
                 //console.log('Score:', score);
             }
 
-            if (bulletY < 0 || bulletY > 600 || bulletX < 0 || bulletX > 800) {
+            if (bulletY < 0 || bulletY > gameArea.offsetHeight || bulletX < 0 || bulletX > gameArea.offsetWidth) {
                 bullet.remove();
                 clearInterval(bulletInterval);
             }
@@ -213,6 +232,7 @@ pinyinInput.addEventListener('change', (e) => {
 });
 
 document.getElementById('retry-button').addEventListener('click', retryGame);
+document.getElementById('retry-failed-button').addEventListener('click', retryFailedGame);
 
 function gameLoop() {
     //console.log('Game loop running...'); // Debugging game loop
@@ -229,16 +249,51 @@ function showResults() {
     document.getElementById('final-missed-list').textContent = missedList;
     document.getElementById('results-screen').classList.remove('hidden');
     pinyinInput.disabled = true;
+
+    const retryFailedButton = document.getElementById('retry-failed-button');
+    if (missedCount === 0) {
+        retryFailedButton.style.display = 'none';
+    } else {
+        retryFailedButton.style.display = 'inline-block';
+    }
 }
 
 function retryGame() {
+    console.log('characterSpeed on retryGame:', characterSpeed);
     //console.log('retryGame function called.');
     // Reset game state
     score = 0;
-    characterSpeed = 0.5;
     missedCharacters.clear();
     activeCharacters = [];
     availableCharacters = [...allCharacters]; // Reset available characters
+
+    // Clear existing characters from game area
+    gameArea.querySelectorAll('.character').forEach(char => char.remove());
+
+    // Update displays
+    scoreDisplay.textContent = `Score: ${score}`;
+    updateMissedCharactersDisplay();
+
+    // Hide results screen and enable input
+    document.getElementById('results-screen').classList.add('hidden');
+    pinyinInput.disabled = false;
+    pinyinInput.value = '';
+    pinyinInput.focus();
+
+    // Restart game loop and character creation
+    clearInterval(gameInterval);
+    gameInterval = setInterval(createCharacter, 2000);
+    gameLoop();
+}
+
+function retryFailedGame() {
+    console.log('characterSpeed on retryFailedGame:', characterSpeed);
+    //console.log('retryFailedGame function called.');
+    // Reset game state
+    score = 0;
+    availableCharacters = Array.from(missedCharacters);
+    missedCharacters.clear();
+    activeCharacters = [];
 
     // Clear existing characters from game area
     gameArea.querySelectorAll('.character').forEach(char => char.remove());

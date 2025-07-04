@@ -31,6 +31,16 @@
                         </svg>
                     </div>
                 </div>
+                <div class="button-wrapper">
+                    <div id="pause-button" class="arrow-button">
+                        <svg id="pause-icon" class="arrow-icon" viewBox="0 0 24 24">
+                            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                        </svg>
+                        <svg id="play-icon" class="arrow-icon" viewBox="0 0 24 24" style="display: none;">
+                            <path d="M8 5v14l11-7z"/>
+                        </svg>
+                    </div>
+                </div>
             </div>
         </div>
         <div id="results-screen" class="hidden">
@@ -39,6 +49,7 @@
             <p id="final-missed"></p>
             <p id="final-missed-list"></p>
             <button id="retry-button">Retry</button>
+            <button id="retry-failed-button">Retry Only Failed</button>
         </div>
     </div>
     <audio id="shoot-sound" src="./sounds/fire.mp3"></audio>

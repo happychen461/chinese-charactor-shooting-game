@@ -5,8 +5,8 @@ body {
 
 #game-container {
     position: relative;
-    width: 800px;
-    height: 600px;
+    width: 1200px;
+    height: 800px;
     border: 1px solid black;
     margin: 0 auto;
     overflow: hidden;
@@ -33,15 +33,27 @@ body {
     height: 50px;
     font-size: 3em;
     bottom: 10px;
-    left: 375px;
+    left: 575px;
 }
 
 #pinyin-input {
     position: absolute;
     bottom: 10px;
-    left: 10px;
-    width: 200px;
-    padding: 5px;
+    left: 10px; /* Move to left */
+    width: 300px; /* Increased width */
+    padding: 10px 15px; /* Increased padding */
+    font-size: 1.2em; /* Larger font */
+    border: 2px solid #4CAF50; /* Green border */
+    border-radius: 8px; /* Rounded corners */
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    outline: none; /* Remove default outline */
+    transition: border-color 0.3s ease, box-shadow 0.3s ease; /* Smooth transitions */
+}
+
+#pinyin-input:focus {
+    border-color: #45a049; /* Darker green on focus */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Larger shadow on focus */
 }
 
 #score-display {
@@ -78,7 +90,7 @@ body {
     position: absolute;
     width: 50px;
     height: 50px;
-    background-image: url('https://www.transparentpng.com/thumb/explosion/explosion-transparent-png-2.png');
+    background-image: url('./img/explosion.png');
     background-size: contain;
     animation: explode 0.5s ease-out;
 }
@@ -102,7 +114,7 @@ body {
 .button-container {
     display: flex;
     flex-direction: column;
-    gap: 10px; /* Reduced gap */
+    gap: 0;
     align-items: center;
 }
 .button-wrapper {
@@ -112,11 +124,11 @@ body {
     gap: 10px;
 }
 .arrow-button {
-    width: 60px; /* Smaller width */
-    height: 60px; /* Smaller height */
+    width: 40px; /* Smaller width */
+    height: 40px; /* Smaller height */
     background-color: #81c784; /* Greenish button */
     border: 3px solid #4caf50; /* Smaller border */
-    border-radius: 50%;
+    border-radius: 0;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,6 +153,13 @@ body {
     height: 70%;
     filter: drop-shadow(2px 2px 3px rgba(0,0,0,0.3)); /* Shadow for the arrow */
 }
+
+#pause-icon, #play-icon {
+    width: 50%;
+    height: 50%;
+}
+
+
 
 #results-screen {
     position: absolute;
@@ -214,4 +233,6 @@ body {
 .hidden {
     display: none;
 }
+
+
 

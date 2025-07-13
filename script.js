@@ -47,6 +47,8 @@ const pauseButton = document.getElementById('pause-button');
 const pauseIcon = document.getElementById('pause-icon');
 const playIcon = document.getElementById('play-icon');
 const fullscreenButton = document.getElementById('fullscreen-button');
+const pausePopup = document.getElementById('pause-popup');
+const resumeButton = document.getElementById('resume-button');
 
 function togglePauseGame() {
     gamePaused = !gamePaused;
@@ -54,14 +56,20 @@ function togglePauseGame() {
         pauseIcon.style.display = 'none';
         playIcon.style.display = 'block';
         clearInterval(gameInterval);
+        document.getElementById('stats-total').textContent = totalCharacters;
+        document.getElementById('stats-correct').textContent = correctCount;
+        document.getElementById('stats-missed').textContent = missedCharacters.size;
+        pausePopup.classList.remove('hidden');
     } else {
         pauseIcon.style.display = 'block';
         playIcon.style.display = 'none';
         gameInterval = setInterval(createCharacter, 2000);
+        pausePopup.classList.add('hidden');
     }
 }
 
 pauseButton.addEventListener('click', togglePauseGame);
+resumeButton.addEventListener('click', togglePauseGame);
 
 fullscreenButton.addEventListener('click', () => {
     if (document.fullscreenElement) {

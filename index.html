@@ -67,6 +67,15 @@
             <button id="retry-button">Retry</button>
             <button id="retry-failed-button">Retry Only Failed</button>
         </div>
+        <div id="pause-popup" class="hidden">
+            <h2>Game Paused</h2>
+            <div id="pause-stats">
+                <p>Total Characters: <span id="stats-total">0</span></p>
+                <p>Correct: <span id="stats-correct">0</span></p>
+                <p>Missed: <span id="stats-missed">0</span></p>
+            </div>
+            <button id="resume-button">Resume</button>
+        </div>
     </div>
     <audio id="shoot-sound" src="./sounds/fire.mp3"></audio>
     <audio id="explosion-sound" src="./sounds/explode.mp3"></audio>

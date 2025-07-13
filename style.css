@@ -398,5 +398,58 @@ h1 {
     display: none;
 }
 
+#pause-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 40px;
+    border-radius: 15px;
+    text-align: center;
+    z-index: 40;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+}
+
+#pause-popup h2 {
+    margin-top: 0;
+    font-size: 2.5em;
+    color: #FFD700; /* Gold color for pause title */
+}
+
+#pause-popup button {
+    padding: 15px 30px;
+    font-size: 1.5em;
+    background: linear-gradient(to bottom, #FFD700, #FFA500); /* Gold gradient */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+}
+
+#pause-popup button:hover {
+    background: linear-gradient(to bottom, #FFA500, #FF8C00);
+    transform: scale(1.05) translateY(-3px);
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.5);
+}
+
+#pause-popup button:active {
+    background-color: #FF8C00;
+    transform: scale(0.95) translateY(0);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#pause-stats {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+#pause-stats p {
+    margin: 5px 0;
+}
+
 
 

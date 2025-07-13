@@ -1,0 +1,25 @@
+{
+  "name": "chinese-charactor-shooting-game",
+  "version": "1.0.0",
+  "description": "A fun and interactive web-based game where you shoot down falling Chinese characters by typing their Pinyin.",
+  "main": "script.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/happychen461/chinese-charactor-shooting-game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/happychen461/chinese-charactor-shooting-game/issues"
+  },
+  "homepage": "https://github.com/happychen461/chinese-charactor-shooting-game#readme",
+  "devDependencies": {
+    "jest": "^30.0.4",
+    "jest-environment-jsdom": "^30.0.4"
+  }
+}

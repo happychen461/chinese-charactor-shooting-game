@@ -451,5 +451,14 @@ h1 {
     margin: 5px 0;
 }
 
+#pause-stats {
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+#pause-stats p {
+    margin: 5px 0;
+}
+
 
 

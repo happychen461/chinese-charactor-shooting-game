@@ -285,7 +285,7 @@
     {
         "char":"路边",
         "pinyin":"lubian"
-    },,
+    },
     {
         "char":"风车",
         "pinyin":"fengche"
@@ -320,7 +320,7 @@
     },
     {
         "char":"蛇",
-        "pinyin:":"she"
+        "pinyin":"she"
     },
     {
         "char":"鹤",
@@ -358,5 +358,4 @@
         "char":"虾",
         "pinyin":"xia"
     }
-    
 ]

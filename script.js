@@ -316,6 +316,7 @@ pinyinInput.addEventListener('change', (e) => {
 
 document.getElementById('retry-button').addEventListener('click', retryGame);
 document.getElementById('retry-failed-button').addEventListener('click', retryFailedGame);
+document.getElementById('print-button').addEventListener('click', saveFailedCharactersToFile);
 
 function gameLoop() {
     //console.log('Game loop running...'); // Debugging game loop
@@ -334,7 +335,12 @@ function showResults() {
     if (missedCharacters.size > 0) {
         missedCharacters.forEach(c => {
             const listItem = document.createElement('li');
-            listItem.textContent = `${c.char} (${c.pinyin})`;
+            const charSpan = document.createElement('span');
+            charSpan.textContent = c.char;
+            const pinyinSpan = document.createElement('span');
+            pinyinSpan.textContent = ` (${c.pinyin})`;
+            listItem.appendChild(charSpan);
+            listItem.appendChild(pinyinSpan);
             finalMissedList.appendChild(listItem);
         });
     } else {
@@ -408,4 +414,17 @@ function retryFailedGame() {
     clearInterval(gameInterval);
     gameInterval = setInterval(createCharacter, 2000);
     gameLoop();
+}
+
+function saveFailedCharactersToFile() {
+    let content = "Missed Characters:\n\n";
+    missedCharacters.forEach(c => {
+        content += `${c.char} (${c.pinyin})\n`;
+    });
+
+    const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'failed_characters.txt';
+    a.click();
 }

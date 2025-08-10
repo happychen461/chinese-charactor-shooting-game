@@ -150,17 +150,7 @@ h1 {
     gap: 2px; /* Smaller space between items */
 }
 
-#correct-count, #missed-count-display {
-    font-size: 1em; /* Base font size for individual counts */
-    color: white; /* White text for counts */
-    text-shadow: none; /* Remove individual text shadow */
-}
 
-#correct-count, #missed-count-display {
-    font-size: 1em; /* Base font size for individual counts */
-    color: white; /* White text for counts */
-    text-shadow: none; /* Remove individual text shadow */
-}
 
 #correct-count, #missed-count-display {
     font-size: 1em; /* Base font size for individual counts */
@@ -447,14 +437,7 @@ h1 {
     font-size: 1.2em;
 }
 
-#pause-stats p {
-    margin: 5px 0;
-}
 
-#pause-stats {
-    margin-bottom: 20px;
-    font-size: 1.2em;
-}
 
 #pause-stats p {
     margin: 5px 0;
@@ -462,3 +445,16 @@ h1 {
 
 
 
+@media print {
+    body * {
+        visibility: hidden;
+    }
+    #results-screen, #results-screen * {
+        visibility: visible;
+    }
+    #results-screen {
+        position: absolute;
+        left: 0;
+        top: 0;
+    }
+}
